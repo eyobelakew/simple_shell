@@ -48,7 +48,11 @@ void sig_handler(int sig_num)
     {
         printf("\n");
         printf("cisfun$ ");
-        fflush(stdout);
+        fflush(stdout);/** Printout whatever is in the buffer in output stream
+       			* this is to fix C-c bug that prints out the prompt on 
+       			* the same line iff multiple C-c is pressed.
+       			* This also fixes waiting for return key.
+       		        */
     }
 }
 
@@ -58,7 +62,7 @@ int main(void)
 	ssize_t len = 0;
 	char *buff = NULL, *value, *pathname, **arv;
 	size_t size = 0;
-	list_path *head = '\0';
+	list_path *head = NULL;
 	void (*f)(char **);
 
 	signal(SIGINT, sig_handler);
