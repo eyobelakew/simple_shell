@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * execute - executes a command
  * @argv: array of arguments
@@ -8,7 +7,6 @@
 
 void execute(char **argv)
 {
-
 	int d, status;
 
 	if (!argv || !argv[0])
@@ -20,9 +18,11 @@ void execute(char **argv)
 	}
 	if (d == 0)
 	{
-		execve(argv[0], argv, environ);
+		if (execve(argv[0], argv, environ) == -1)
+		{
 			perror(argv[0]);
-		exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
+		}
 	}
 	wait(&status);
 }
