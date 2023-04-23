@@ -1,24 +1,24 @@
 #include "shell.h"
 
 /**
-* check_atty - check is it's terminal interactive mode and print prompt
-*
-* Return: Nothing
-*/
+ * check_atty - check if it's in terminal interactive mode and print prompt
+ *
+ * Return: Nothing
+ */
 
-void check_atty()
- {
- 	if (isatty(STDIN_FILENO))
- 	printf("cisfun$ ");
+void check_atty(void)
+{
+	if (isatty(STDIN_FILENO))
+		printf("cisfun$ ");
 }
 
 /**
-* _EOF - handle end-of-file condition
-* @len: num of characters read from the input stream
-* @buff: characters read from input stream
-*
-* Return: (0) Success.
-*/
+ * _EOF - handle end-of-file condition
+ * @len: num of characters read from the input stream
+ * @buff: characters read from input stream
+ *
+ * Return: (0) Success.
+ */
 
 void _EOF(int len, char *buff)
 {
@@ -35,27 +35,31 @@ void _EOF(int len, char *buff)
 }
 
 /**
-* sig_handler - handle Ctrl + C
-* @sig_num - signal number recieved.
-*
-* Return: Nothing
-*/
-
+ * sig_handler - handle Ctrl + C
+ * @sig_num: signal number received
+ *
+ * Return: Nothing
+ */
 
 void sig_handler(int sig_num)
 {
-    if (sig_num == SIGINT) /* SIGINT -signal for intrrupt (C-c). */
-    {
-        printf("\n");
-        printf("cisfun$ ");
-        fflush(stdout);/** Printout whatever is in the buffer in output stream
-       			* this is to fix C-c bug that prints out the prompt on 
-       			* the same line iff multiple C-c is pressed.
-       			* This also fixes waiting for return key.
-       		        */
-    }
+	if (sig_num == SIGINT) /* SIGINT -signal for interrupt (C-c). */
+	{
+		printf("\n");
+		printf("cisfun$ ");
+		fflush(stdout); /* Print out whatever is in the buffer in output stream
+				  * this is to fix C-c bug that prints out the prompt on
+				  * the same line iff multiple C-c is pressed.
+				  * This also fixes waiting for return key.
+				  */
+	}
 }
 
+/**
+ * main - entry point
+ *
+ * Return: (0) Success
+ */
 
 int main(void)
 {
