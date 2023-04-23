@@ -9,7 +9,7 @@
 char *_getenv(const char *name)
 {
     if (!name)
-        return NULL;
+        return (NULL);
 
     size_t namelen = strlen(name);
 
@@ -17,11 +17,11 @@ char *_getenv(const char *name)
     {
         if (strncmp(name, *envp, namelen) == 0 && (*envp)[namelen] == '=')
         {
-            return *envp + namelen + 1;
+            return (*envp + namelen + 1);
         }
     }
 
-    return NULL;
+    return (NULL);
 }
 
 
@@ -68,7 +68,8 @@ list_path *linkpath(char *path)
 {
     char *token, *path_cpy;
     list_path *head = NULL;
-	path_cpy = strdup(path);
+
+    path_cpy = strdup(path);
 
     token = strtok(path_cpy, ":");
     while (token != NULL)
@@ -76,6 +77,8 @@ list_path *linkpath(char *path)
         add_node_end(&head, token);
         token = strtok(NULL, ":");
     }
+
+    free(path_cpy);
 
     return (head);
 }
@@ -126,9 +129,3 @@ void free_list(list_path *head)
         free(temp);
     }
 }
-
-
-
-
-
-
