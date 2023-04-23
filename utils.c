@@ -30,7 +30,13 @@ int _atoi(char *s)
 }
 
 
-
+/**
+ * splitstring - splits a string into an array of strings
+ * @str: the string to split
+ * @delim: the delimiter to use for splitting
+ *
+ * Return: a dynamically-allocated array of strings
+ */
 char **splitstring(char *str, const char *delim)
 {
     char **words = NULL;
