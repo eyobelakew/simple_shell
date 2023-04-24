@@ -8,23 +8,19 @@
  *         -1 (Failure)
  */
 int my_unsetenv(const char *name)
-{
-	/* Check if the variable exists */
+{	/* Check if the variable exists */
 	char *existing_value = getenv(name);
-
-	if (existing_value == NULL)
-	{
-		return (0);
-	}
-
-	/* Allocate memory for a new environment array without the variable */
+	char **new_environ = (char **)malloc((envc + 1) * sizeof(char *));
 	int envc = 0;
 
+	if (existing_value == NULL)
+		return (0);
+
+	/* Allocate memory for a new environment array without the variable */
 	while (environ[envc])
 	{
 		envc++;
 	}
-	char **new_environ = (char **)malloc((envc + 1) * sizeof(char *));
 	if (new_environ == NULL)
 	{
 		return (-1);
@@ -35,7 +31,8 @@ int my_unsetenv(const char *name)
 
 	while (environ[i])
 	{
-		if (strncmp(environ[i], name, strlen(name)) != 0 || environ[i][strlen(name)] != '=')
+		if (strncmp(environ[i], name, strlen(name)) != 0 ||
+		    environ[i][strlen(name)] != '=')
 		{
 			new_environ[i] = environ[i];
 		}
