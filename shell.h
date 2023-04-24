@@ -44,6 +44,13 @@ int _putchar(char c);
 char **splitstring(char *str, const char *delim);
 void freearv(char **arv);
 void free_list(list_path *head);
+
+
+int add_var(char *new_var);
+int rep_var(const char *name, char *new_var);
+char *create_var(const char *name, const char *value);
+
+
 /************************************************** MAIN FUNCTIONS ****************************************************************/
 extern char **environ;
 
