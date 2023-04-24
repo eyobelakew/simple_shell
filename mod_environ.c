@@ -9,9 +9,9 @@
  */
 int my_unsetenv(const char *name)
 {	/* Check if the variable exists */
+	int envc = 0;
 	char *existing_value = getenv(name);
 	char **new_environ = (char **)malloc((envc + 1) * sizeof(char *));
-	int envc = 0;
 
 	if (existing_value == NULL)
 		return (0);
