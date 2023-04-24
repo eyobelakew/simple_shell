@@ -8,20 +8,20 @@
  */
 char *_getenv(const char *name)
 {
-    if (!name)
-        return (NULL);
+	if (!name)
+		return (NULL);
 
-    size_t namelen = strlen(name);
+	size_t namelen = strlen(name);
 
-    for (char **envp = environ; *envp; envp++)
-    {
-        if (strncmp(name, *envp, namelen) == 0 && (*envp)[namelen] == '=')
-        {
-            return (*envp + namelen + 1);
-        }
-    }
+	for (char **envp = environ; *envp; envp++)
+	{
+		if (strncmp(name, *envp, namelen) == 0 && (*envp)[namelen] == '=')
+		{
+			return (*envp + namelen + 1);
+		}
+	}
 
-    return (NULL);
+	return (NULL);
 }
 
 
@@ -34,28 +34,28 @@ char *_getenv(const char *name)
  */
 list_path *add_node_end(list_path **head, char *str)
 {
-    list_path *new_node;
-    list_path *last_node = *head;
+	list_path *new_node;
+	list_path *last_node = *head;
 
-    new_node = malloc(sizeof(list_path));
-    if (new_node == NULL)
-        return (NULL);
+	new_node = malloc(sizeof(list_path));
+	if (new_node == NULL)
+		return (NULL);
 
-    new_node->dir = str;
-    new_node->p = NULL;
+	new_node->dir = str;
+	new_node->p = NULL;
 
-    if (*head == NULL)
-    {
-        *head = new_node;
-        return (new_node);
-    }
+	if (*head == NULL)
+	{
+		*head = new_node;
+		return (new_node);
+	}
 
-    while (last_node->p != NULL)
-        last_node = last_node->p;
+	while (last_node->p != NULL)
+		last_node = last_node->p;
 
-    last_node->p = new_node;
+	last_node->p = new_node;
 
-    return (new_node);
+	return (new_node);
 }
 
 /**
@@ -66,19 +66,19 @@ list_path *add_node_end(list_path **head, char *str)
  */
 list_path *linkpath(char *path)
 {
-    char *token, *path_cpy;
-    list_path *head = NULL;
+	char *token, *path_cpy;
+	list_path *head = NULL;
 
-    path_cpy = strdup(path);
+	path_cpy = strdup(path);
 
-    token = strtok(path_cpy, ":");
-    while (token != NULL)
-    {
-        add_node_end(&head, token);
-        token = strtok(NULL, ":");
-    }
+	token = strtok(path_cpy, ":");
+	while (token != NULL)
+	{
+		add_node_end(&head, token);
+		token = strtok(NULL, ":");
+	}
 
-    return (head);
+	return (head);
 }
 
 
@@ -91,24 +91,24 @@ list_path *linkpath(char *path)
  */
 char *_which(char *filename, list_path *head)
 {
-    struct stat st;
-    char *path;
+	struct stat st;
+	char *path;
 
-    while (head != NULL)
-    {
-        path = malloc(strlen(head->dir) + strlen(filename) + 2);
-        if (path == NULL)
-            return (NULL);
+	while (head != NULL)
+	{
+		path = malloc(strlen(head->dir) + strlen(filename) + 2);
+		if (path == NULL)
+			return (NULL);
 
-        sprintf(path, "%s/%s", head->dir, filename);
-        if (stat(path, &st) == 0 && (st.st_mode & S_IXUSR))
-            return (path);
+		sprintf(path, "%s/%s", head->dir, filename);
+		if (stat(path, &st) == 0 && (st.st_mode & S_IXUSR))
+			return (path);
 
-        free(path);
-        head = head->p;
-    }
+		free(path);
+		head = head->p;
+	}
 
-    return (NULL);
+	return (NULL);
 }
 
 /**
@@ -117,13 +117,13 @@ char *_which(char *filename, list_path *head)
  */
 void free_list(list_path *head)
 {
-    list_path *temp;
+	list_path *temp;
 
-    while (head != NULL)
-    {
-        temp = head;
-        head = head->p;
-        free(temp->dir);
-        free(temp);
-    }
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->p;
+		free(temp->dir);
+		free(temp);
+	}
 }
