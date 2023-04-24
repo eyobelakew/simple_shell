@@ -62,63 +62,27 @@ int my_unsetenv(const char *name)
  * Return: 0 (Success)
  *         -1 (Failure)
  */
+
 int my_setenv(const char *name, const char *value, int overwrite)
 {
-	/* Calculate the length of the new environment variable string */
-	size_t name_len = strlen(name), value_len = strlen(value), var_len = name_len + 1 + value_len + 1;
-
-	/* Allocate memory for the new environment variable string */
-	char *new_var = (char *)malloc(var_len);
+	char *new_var = create_var(name, value);
 
 	if (new_var == NULL)
 		return (-1);
 
-	/* Construct the new environment variable string */
-	strncpy(new_var, name, name_len);
-	new_var[name_len] = '=';
-	strncpy(new_var + name_len + 1, value, value_len);
-	new_var[var_len - 1] = '\0';
-
-	/* Search for the existing variable */
-	char **p = environ;
-
-	while (*p)
+	if (rep_var(name, new_var) == 0)
 	{
-		if (strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
+		if (!overwrite)
 		{
-			if (overwrite)
-			{
-				/* If overwrite is set, replace the existing variable */
-				*p = new_var;
-				return (0);
-			}
-			else
-			{
-				/* If overwrite is not set, keep the existing variable */
-				free(new_var);
-				return (0);
-			}
+			free(new_var);
+			return (0);
 		}
-		p++;
 	}
-
-	/* Variable not found, add it to the environment */
-	size_t env_len = p - environ;
-	char **new_environ = (char **)malloc((env_len + 2) * sizeof(char *));
-
-	if (new_environ == NULL)
+	else
 	{
-		free(new_var);
-		return (-1);
+		if (add_var(new_var) == -1)
+			return (-1);
 	}
-
-	/* Copy the existing environment to the new environment */
-	memcpy(new_environ, environ, env_len * sizeof(char *));
-	new_environ[env_len] = new_var;
-	new_environ[env_len + 1] = NULL;
-
-	/* Replace the old environment with the new environment */
-	environ = new_environ;
 
 	return (0);
 }
