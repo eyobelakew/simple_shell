@@ -8,45 +8,27 @@
  *         -1 (Failure)
  */
 int my_unsetenv(const char *name)
-{	/* Check if the variable exists */
-	int envc = 0, i = 0;
-	char *existing_value = getenv(name);
-	char **new_environ = (char **)malloc((envc + 1) * sizeof(char *));
+{
+    size_t name_len = strlen(name);
+    char **p = environ, **q;
 
-	if (existing_value == NULL)
-		return (0);
+    while (*p)
+    {
+        if (strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
+        {
+ /* Shift remaining strings down one position to overwrite the removed string */
+            for (q = p; *q; ++q)
+            {
+                *q = *(q + 1);
+            }
+            return 0;
+        }
+        ++p;
+    }
 
-	/* Allocate memory for a new environment array without the variable */
-	while (environ[envc])
-	{
-		envc++;
-	}
-	if (new_environ == NULL)
-	{
-		return (-1);
-	} /* Return failure if malloc fails */
-
-	/* Copy the environment variables into the new array */
-	while (environ[i])
-	{
-		if (strncmp(environ[i], name, strlen(name)) != 0 ||
-		    environ[i][strlen(name)] != '=')
-		{
-			new_environ[i] = environ[i];
-		}
-		else /* Skip the variable to be unset */
-		{
-			i++;
-			continue;
-		}
-		i++;
-	}
-	new_environ[i] = NULL; /* Null terminate the array */
-
-	environ = new_environ; /* Replace environ with the modified one */
-
-	return (0);
+    return -1;  /* Nothing found */
 }
+
 
 /**
  * my_setenv - setenv library replica.
