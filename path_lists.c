@@ -78,8 +78,6 @@ list_path *linkpath(char *path)
         token = strtok(NULL, ":");
     }
 
-    free(path_cpy);
-
     return (head);
 }
 
