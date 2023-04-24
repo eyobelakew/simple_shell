@@ -65,7 +65,7 @@ int my_unsetenv(const char *name)
 int my_setenv(const char *name, const char *value, int overwrite)
 {
 	/* Calculate the length of the new environment variable string */
-	size_t name_len = strlen(name), value_len = strlen(value),var_len = name_len + 1 + value_len + 1;
+	size_t name_len = strlen(name), value_len = strlen(value), var_len = name_len + 1 + value_len + 1;
 
 	/* Allocate memory for the new environment variable string */
 	char *new_var = (char *)malloc(var_len);
@@ -77,7 +77,7 @@ int my_setenv(const char *name, const char *value, int overwrite)
 	strncpy(new_var, name, name_len);
 	new_var[name_len] = '=';
 	strncpy(new_var + name_len + 1, value, value_len);
-	new_var[var_len - 1] = NULL;
+	new_var[var_len - 1] = '\0';
 
 	/* Search for the existing variable */
 	char **p = environ;
