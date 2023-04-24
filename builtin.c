@@ -25,7 +25,7 @@ void __exit(char **arv)
 void cd(char **arv)
 {
 	char *path = arv[1]; /* Retrive path from input array */
-	char *dir;
+	char *dir, *curr_dir;
 
 	/* Check if path is null or "~". assign dir to HOME if so */
 	if (path == NULL || strcmp(path, "~") == 0)
@@ -41,7 +41,7 @@ void cd(char **arv)
 		dir = path; /*Else set dir to provided path */
 	}
 
-	char *curr_dir = getcwd(NULL, 0); /* Get absolute path of current dir */
+	curr_dir = getcwd(NULL, 0); /* Get absolute path of current dir */
 	if (chdir(dir) != 0)
 	{
 		printf("cd: %s: No such file or directory\n", dir);
@@ -57,7 +57,7 @@ void cd(char **arv)
  * env - prints the current environment variables
  * @arv: array of words of the entered line
  */
-void env(char **arv)
+void env(char **arv __attribute__((unused)))
 {
 	int i;
 

@@ -9,7 +9,7 @@
  */
 int my_unsetenv(const char *name)
 {	/* Check if the variable exists */
-	int envc = 0;
+	int envc = 0, i = 0;
 	char *existing_value = getenv(name);
 	char **new_environ = (char **)malloc((envc + 1) * sizeof(char *));
 
@@ -27,8 +27,6 @@ int my_unsetenv(const char *name)
 	} /* Return failure if malloc fails */
 
 	/* Copy the environment variables into the new array */
-	int i = 0;
-
 	while (environ[i])
 	{
 		if (strncmp(environ[i], name, strlen(name)) != 0 ||

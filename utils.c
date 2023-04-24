@@ -78,7 +78,7 @@ int rep_var(const char *name, char *new_var)
 int add_var(char *new_var)
 {
 	size_t env_len = 0;
-	char **p = environ;
+	char **p = environ, **new_environ;
 
 	while (*p)
 	{
@@ -86,7 +86,7 @@ int add_var(char *new_var)
 		p++;
 	}
 
-	char **new_environ = malloc((env_len + 2) * sizeof(char *));
+	new_environ = malloc((env_len + 2) * sizeof(char *));
 
 	if (new_environ == NULL)
 	{

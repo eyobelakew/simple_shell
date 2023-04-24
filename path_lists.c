@@ -8,12 +8,13 @@
  */
 char *_getenv(const char *name)
 {
+	size_t namelen = strlen(name);
+	char **envp;
+
 	if (!name)
 		return (NULL);
 
-	size_t namelen = strlen(name);
-
-	for (char **envp = environ; *envp; envp++)
+	for (envp = environ; *envp; envp++)
 	{
 		if (strncmp(name, *envp, namelen) == 0 && (*envp)[namelen] == '=')
 		{
