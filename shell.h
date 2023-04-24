@@ -1,6 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
-/********************************************** SYSTEM LIBRARIES *****************************************************************/
+/************************** SYSTEM LIBRARIES *********************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -13,7 +13,7 @@
 #include <signal.h>
 
 
-/****************************************************** STRUCTURES ****************************************************************/
+/************************** STRUCTURES ***************************************/
 
 /**
  * struct list_path - Linked list containing PATH directories
@@ -38,7 +38,7 @@ typedef struct mybuild
 	void (*func)(char **);
 } mybuild;
 
-/************************************************* I/O AND UTIL FUNCTIONS*********************************************************/
+/********************* I/O AND UTIL FUNCTIONS ********************************/
 int _putchar(char c);
 
 char **splitstring(char *str, const char *delim);
@@ -51,7 +51,7 @@ int rep_var(const char *name, char *new_var);
 char *create_var(const char *name, const char *value);
 
 
-/************************************************** MAIN FUNCTIONS ****************************************************************/
+/******************** MAIN FUNCTIONS *****************************************/
 extern char **environ;
 
 void execute(char **argv);
@@ -68,5 +68,6 @@ void _unsetenv(char **arv);
 int my_unsetenv(const char *name);
 void cd(char **arv);
 int my_setenv(const char *name, const char *value, int overwrite);
-/************************************************************END *********************************************************************/
+/************************ END *********************************************/
+
 #endif
