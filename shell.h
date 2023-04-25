@@ -40,6 +40,7 @@ typedef struct mybuild
 
 /********************* I/O AND UTIL FUNCTIONS ********************************/
 int _putchar(char c);
+char *_strcpy(char *dest, const char *src);
 
 char **splitstring(char *str, const char *delim);
 void freearv(char **arv);

@@ -73,3 +73,17 @@ char **splitstring(char *str, const char *delim)
 
 	return (words);
 }
+
+char *_strcpy(char *dest, const char *src)
+{
+	char* c_dest = dest;
+
+	while(*src)
+	{
+		*c_dest++ = *src++;
+	}
+
+	c_dest = '\0';
+
+	return (dest);
+}
