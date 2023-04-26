@@ -45,7 +45,7 @@ char *_strcpy(char *dest, const char *src);
 char **splitstring(char *str, const char *delim);
 void freearv(char **arv);
 void free_list(list_path *head);
-char* _itoa(int num);
+char *_itoa(int num);
 void run_command(char *input, int line_number);
 
 int add_var(char *new_var);
