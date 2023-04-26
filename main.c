@@ -56,18 +56,17 @@ void sig_handler(int sig_num)
 }
 
 /**
- * main - entry point
- * @argc: argument counter
- * @argv: argument vector
+ * loop - infinite loop for the shell
+ * @error_msg: shell name reported from main()
  *
- * Return: (0) Success
+ * Return: Nothing
  */
 
-int main(int argc __attribute__((unused)), char *argv[])
+void loop(char *error_msg)
 {
 	ssize_t len = 0, line_number = 1;
 	size_t size = 0;
-	char *buff = NULL, *value, *pathname, **arv, *error_msg = argv[0];
+	char *buff = NULL, *value, *pathname, **arv;
 	list_path *head = NULL;
 	void (*f)(char **);
 
@@ -105,5 +104,20 @@ int main(int argc __attribute__((unused)), char *argv[])
 	free_list(head);
 	freearv(arv);
 	free(buff);
+}
+
+/**
+ * main - entry point
+ * @argc: argument counter
+ * @argv: argument vector
+ *
+ * Return: (0) Success
+ */
+
+int main(int argc __attribute__((unused)), char *argv[])
+{
+	char *error_msg = argv[0];
+
+	loop(error_msg);
 	return (0);
 }
