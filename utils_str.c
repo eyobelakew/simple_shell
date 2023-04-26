@@ -29,6 +29,37 @@ int _atoi(char *s)
 	return (sign * res);
 }
 
+/**
+ * _itoa - convert a intiger to string
+ * @num: input number
+ *
+ * Return: converted string
+ */
+
+char *_itoa(int num)
+{
+	int temp = num, digits = 0;
+	char *str;
+
+	while (temp != 0)
+	{
+		digits++;
+		temp /= 10;
+	}
+
+	str = malloc(sizeof(char) * (digits + 1));
+	str[digits] = '\0';
+
+	while (digits > 0)
+	{
+		str[--digits] = (num % 10) + '0';
+		num /= 10;
+	}
+
+	return (str);
+}
+
+
 
 /**
  * splitstring - splits a string into an array of strings
