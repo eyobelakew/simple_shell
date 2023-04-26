@@ -45,7 +45,8 @@ char *_strcpy(char *dest, const char *src);
 char **splitstring(char *str, const char *delim);
 void freearv(char **arv);
 void free_list(list_path *head);
-
+char* _itoa(int num);
+void run_command(char *input, int line_number);
 
 int add_var(char *new_var);
 int rep_var(const char *name, char *new_var);
@@ -55,7 +56,7 @@ char *create_var(const char *name, const char *value);
 /******************** MAIN FUNCTIONS *****************************************/
 extern char **environ;
 
-void execute(char **argv);
+void execute(char **argv, int line_number, char *error_msg);
 char *_getenv(const char *name);
 list_path *linkpath(char *path);
 char *_which(char *filename, list_path *head);
