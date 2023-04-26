@@ -65,7 +65,8 @@ void sig_handler(int sig_num)
 
 int main(int argc __attribute__((unused)), char *argv[])
 {
-	ssize_t len = 0, size = 0, line_number = 1;
+	ssize_t len = 0, line_number = 1;
+	size_t size = 0;
 	char *buff = NULL, *value, *pathname, **arv, *error_msg = argv[0];
 	list_path *head = NULL;
 	void (*f)(char **);
