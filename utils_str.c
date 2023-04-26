@@ -88,7 +88,6 @@ char **splitstring(char *str, const char *delim)
 		words = realloc(words, (i + 2) * sizeof(char *));
 		if (words == NULL)
 		{
-			freearv(old_words);
 			return (NULL);
 		}
 
@@ -99,8 +98,7 @@ char **splitstring(char *str, const char *delim)
 			freearv(words);
 			return (NULL);
 		}
-		
-		strcpy(words[i], token);
+		_strcpy(words[i], token);
 
 		/* move to the next token */
 		token = strtok(NULL, delim);
