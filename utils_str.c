@@ -84,7 +84,6 @@ char **splitstring(char *str, const char *delim)
 	while (token != NULL)
 	{
 		old_words = words;
-		/* resize the words array */
 		words = realloc(words, (i + 2) * sizeof(char *));
 		if (words == NULL)
 		{
@@ -99,15 +98,13 @@ char **splitstring(char *str, const char *delim)
 			freearv(words);
 			return (NULL);
 		}
-		
+
 		strcpy(words[i], token);
 
 		/* move to the next token */
 		token = strtok(NULL, delim);
 		i++;
 	}
-
-	/* add a NULL terminator to the end of the words array */
 	words[i] = NULL;
 	token = NULL;
 
