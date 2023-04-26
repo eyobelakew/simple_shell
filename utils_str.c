@@ -74,11 +74,19 @@ char **splitstring(char *str, const char *delim)
 	return (words);
 }
 
+/**
+ * _strcpy - copy a string to a buffer
+ * @src: source string
+ * @dest: destination buffer
+ *
+ * Return: dest
+ */
+
 char *_strcpy(char *dest, const char *src)
 {
-	char* c_dest = dest;
+	char *c_dest = dest;
 
-	while(*src)
+	while (*src)
 	{
 		*c_dest++ = *src++;
 	}

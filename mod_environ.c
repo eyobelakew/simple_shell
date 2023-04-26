@@ -9,24 +9,24 @@
  */
 int my_unsetenv(const char *name)
 {
-    size_t name_len = strlen(name);
-    char **p = environ, **q;
+	size_t name_len = strlen(name);
+	char **p = environ, **q;
 
-    while (*p)
-    {
-        if (strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
-        {
- /* Shift remaining strings down one position to overwrite the removed string */
-            for (q = p; *q; ++q)
-            {
-                *q = *(q + 1);
-            }
-            return 0;
-        }
-        ++p;
-    }
+	while (*p)
+	{
+		if (strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
+		{
+/* Shift remaining strings down one position to overwrite the removed string */
+			for (q = p; *q; ++q)
+			{
+				*q = *(q + 1);
+			}
+			return (0);
+		}
+		++p;
+	}
 
-    return -1;  /* Nothing found */
+	return (-1);  /* Nothing found */
 }
 
 
