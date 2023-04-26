@@ -57,15 +57,16 @@ void sig_handler(int sig_num)
 
 /**
  * main - entry point
+ * @argc: argument counter
+ * @argv: argument vector
  *
  * Return: (0) Success
  */
 
-int main(void)
+int main(int argc __attribute__((unused)), char *argv[])
 {
-	ssize_t len = 0;
-	char *buff = NULL, *value, *pathname, **arv;
-	size_t size = 0;
+	ssize_t len = 0, size = 0, line_number = 1;
+	char *buff = NULL, *value, *pathname, **arv, *error_msg = argv[0];
 	list_path *head = NULL;
 	void (*f)(char **);
 
@@ -77,7 +78,7 @@ int main(void)
 		_EOF(len, buff);
 		arv = splitstring(buff, " \n");
 		if (!arv || !arv[0])
-			execute(arv);
+			execute(arv, line_number, error_msg);
 		else
 		{
 			value = _getenv("PATH");
@@ -90,14 +91,15 @@ int main(void)
 				f(arv);
 			}
 			else if (!pathname)
-				execute(arv);
+				execute(arv, line_number, error_msg);
 			else if (pathname)
 			{
 				free(arv[0]);
 				arv[0] = pathname;
-				execute(arv);
+				execute(arv, line_number, error_msg);
 			}
 		}
+		line_number++;
 	}
 	free_list(head);
 	freearv(arv);
