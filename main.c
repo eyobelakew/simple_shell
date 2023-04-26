@@ -100,9 +100,9 @@ void loop(char *error_msg)
 			}
 		}
 		line_number++;
+		freearv(arv);
 	}
 	free_list(head);
-	freearv(arv);
 	free(buff);
 }
 

@@ -70,7 +70,7 @@ char *_itoa(int num)
  */
 char **splitstring(char *str, const char *delim)
 {
-	char **words = NULL;
+	char **words = NULL, **old_words = NULL;
 	char *token = NULL;
 	int i = 0;
 
@@ -83,15 +83,23 @@ char **splitstring(char *str, const char *delim)
 	token = strtok(str, delim);
 	while (token != NULL)
 	{
+		old_words = words;
 		/* resize the words array */
 		words = realloc(words, (i + 2) * sizeof(char *));
 		if (words == NULL)
+		{
+			freearv(old_words);
 			return (NULL);
+		}
 
 		/* allocate memory for the current word and copy it */
 		words[i] = malloc(strlen(token) + 1);
 		if (words[i] == NULL)
+		{
+			freearv(words);
 			return (NULL);
+		}
+		
 		strcpy(words[i], token);
 
 		/* move to the next token */
@@ -101,6 +109,7 @@ char **splitstring(char *str, const char *delim)
 
 	/* add a NULL terminator to the end of the words array */
 	words[i] = NULL;
+	token = NULL;
 
 	return (words);
 }
