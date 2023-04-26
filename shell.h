@@ -56,6 +56,7 @@ char *create_var(const char *name, const char *value);
 /******************** MAIN FUNCTIONS *****************************************/
 extern char **environ;
 
+void loop(char *error_msg);
 void execute(char **argv, int line_number, char *error_msg);
 char *_getenv(const char *name);
 list_path *linkpath(char *path);
