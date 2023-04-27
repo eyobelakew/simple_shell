@@ -17,12 +17,11 @@ void check_atty(void)
  * @len: num of characters read from the input stream
  * @buff: characters read from input stream
  *
- * Return: (0) Success.
+ * Return: Nothing
  */
 
 void _EOF(int len, char *buff)
 {
-	(void)buff; /* avoid unused variable warning */
 	if (len == -1) /*if input stream reached EOF */
 	{
 		if (isatty(STDIN_FILENO)) /* If input stream is terminal */
@@ -98,11 +97,12 @@ void loop(char *error_msg)
 				arv[0] = pathname;
 				execute(arv, line_number, error_msg);
 			}
+			free(value);
+			free_list(head);
 		}
 		line_number++;
 		freearv(arv);
 	}
-	free_list(head);
 	free(buff);
 }
 
