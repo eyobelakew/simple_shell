@@ -1,4 +1,4 @@
-#include "shell.h"   
+#include "shell.h"
 
 void sig_handler(int sig);
 int execute(char **args, char **front);
